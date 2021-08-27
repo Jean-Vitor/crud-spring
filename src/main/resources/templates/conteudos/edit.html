@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org/%22%3E">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar conteúdo</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Página inicial</a></li>
+        <li><a th:href="@{/conteudo/list}">Conteúdos</a></li>
+        <li><a th:href="@{/aluno/list}">Alunos</a></li>
+    </ul>
+</nav>
+
+<div class="flex-container">
+    <div class="flex-align">
+        <div class="form-container">
+<form th:action="@{'/conteudo/editar/' + ${conteudo.id}}" method="post" th:object="${conteudo}">
+    <h3>Conteúdo</h3>
+    <div>
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" th:field="${conteudo.nome}" required>
+
+    </div>
+
+    <div>
+        <label for="descricao">Descrição</label>
+        <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" th:field="${conteudo.descricao}" required>
+
+    </div>
+    <div>
+        <label for="aluno">Selecione um aluno</label>
+        <select id="aluno" aria-label="Selecione um aluno" name="aluno" required>
+            <option th:each="aluno : ${alunos}" th:value="${aluno.id}" th:text="${aluno.nome}" th:selected="${aluno.id == conteudo.getAlunoId()}"></option>
+        </select>
+
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

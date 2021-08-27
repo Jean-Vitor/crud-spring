@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org/%22%3E">
+<head>
+    <meta charset="UTF-8">
+    <title>Início</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Página inicial</a></li>
+        <li><a th:href="@{/conteudo/list}">Conteúdos</a></li>
+        <li><a th:href="@{/aluno/list}">Alunos</a></li>
+    </ul>
+</nav>
+<div class="flex-container">
+    <div class="flex-align">
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Conteúdo</th>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Aluno</th>
+                <th>Turma</th>
+                <th>Ano</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="conteudo : ${conteudos}">
+                <td th:text="${conteudo.nome}"></td>
+                <td th:text="${conteudo.data}"></td>
+                <td th:text="${#strings.abbreviate(conteudo.descricao,35)}"></td>
+                <td th:text="${conteudo.getAluno().getNome()}" ></td>
+                <td th:text="${conteudo.getAluno().getTurma()}"></td>
+                <td th:text="${conteudo.getAluno().getAno()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org/%22%3E">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Alunos </title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Página inicial</a></li>
+        <li><a th:href="@{/conteudo/list}">Conteúdos</a></li>
+        <li><a th:href="@{/aluno/list}">Alunos</a></li>
+    </ul>
+</nav>
+<div class="flex-container">
+    <div class="flex-align">
+<div class="form-container">
+<form th:action="@{/aluno/salvar}" method="post" th:object="${aluno}" class="form">
+    <h3>Aluno</h3>
+    <div>
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" required>
+    </div>
+
+    <div>
+        <label for="turma">Turma</label>
+        <input type="text" class="form-control" id="turma" placeholder="Turma" name="turma" required>
+    </div>
+
+    <div>
+        <label for="ano">Ano</label>
+        <input type="text" class="form-control" id="ano" placeholder="Ano" name="ano" required>
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>
+</div>
+    </div>
+</div>
+</body>
+</html>

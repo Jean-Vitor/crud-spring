@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org/%22%3E"><head>
+    <meta charset="UTF-8">
+    <title>Lista de alunos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<nav>
+  <ul>
+    <li><a th:href="@{/}">Página inicial</a></li>
+    <li><a th:href="@{/conteudo/list}">Conteúdos</a></li>
+    <li><a th:href="@{/aluno/list}">Alunos</a></li>
+  </ul>
+</nav>
+<div class="flex-container">
+<div class="flex-align">
+<table class="styled-table">
+  <thead>
+  <tr>
+    <th>Nome</th>
+    <th>Turma</th>
+    <th>Ano</th>
+    <th>Editar</th>
+    <th>Deletar</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="aluno : ${alunos}">
+    <td th:text="${aluno.nome}"></td>
+    <td th:text="${aluno.turma}"></td>
+    <td th:text="${aluno.ano}"></td>
+    <td>
+      <a th:href="@{'/aluno/editar/' + ${aluno.id}}">
+        <button class="btn-edit">
+          <i class="fas fa-edit"></i>
+        </button>
+      </a>
+    </td>
+    <td>
+      <form th:action="@{'/aluno/deletar/' + ${aluno.id}}" method="post">
+        <button class="btn-delete" type="submit">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{/aluno/form}" class="btn-add">
+  <i class="fas fa-plus-circle"></i>
+  <span>Novo Aluno</span>
+</a>
+</div>
+</div>
+</body>
+</html>
