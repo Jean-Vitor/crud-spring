@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    padding 0;
+    padding: 0;
+    box-sizing: content-box;
 }
 
 .flex-container {
@@ -28,7 +29,7 @@ body {
 
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+    padding: 12px 30px;
 }
 
 .styled-table tbody tr {
@@ -55,6 +56,15 @@ body {
         padding: 12px 16px;
         font-size: 16px;
         cursor: pointer;
+}
+
+.btn-view {
+    border: none;
+    background: none;
+    color: rgb(104, 163, 45);
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .btn-edit {
@@ -135,4 +145,12 @@ input[type=text], select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+.container {
+    padding: 30px;
+}
+
+.texto {
+    max-width: 600px;
 }

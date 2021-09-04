@@ -1,8 +1,10 @@
 package com.example.sistema.controller;
 
 import com.example.sistema.model.Aluno;
+import com.example.sistema.model.Comentario;
 import com.example.sistema.model.Conteudo;
 import com.example.sistema.service.AlunoService;
+import com.example.sistema.service.ComentarioService;
 import com.example.sistema.service.ConteudoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,20 +25,41 @@ public class ConteudoController {
     ConteudoService conteudoService;
 
     @Autowired
+    ComentarioService comentarioService;
+
+    @Autowired
     AlunoService alunoService;
 
     @GetMapping("/conteudo/list")
     public ModelAndView getConteudos () {
         ModelAndView my = new ModelAndView("conteudos/list");
+
         List<Conteudo> conteudos = conteudoService.findAll();
         my.addObject("conteudos", conteudos);
+
+        return my;
+    }
+
+    @GetMapping("/detalhes/{id}")
+    public ModelAndView details (@PathVariable("id") long id) {
+        ModelAndView my = new ModelAndView("conteudos/details");
+        Conteudo conteudo = conteudoService.findById(id);
+        List<Comentario> comentarios = comentarioService.findAllByConteudo(conteudo);
+        my.addObject("conteudo", conteudo);
+        my.addObject("comentarios", comentarios);
         return my;
     }
 
     @GetMapping("/conteudo/form")
     public ModelAndView getConteudo () {
-        ModelAndView my = new ModelAndView("conteudos/add");
         List<Aluno> alunos = alunoService.findAll();
+        ModelAndView my;
+        if (alunos.isEmpty()) {
+            my = new ModelAndView("conteudos/list");
+            my.addObject("error", "Você não pode cadastrar conteúdos sem alunos cadastrados");
+            return my;
+        }
+        my = new ModelAndView("conteudos/add");
         my.addObject("alunos", alunos);
         return my;
     }

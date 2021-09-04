@@ -6,6 +6,7 @@ import org.hibernate.annotations.NotFoundAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity(name="conteudo")
 public class Conteudo {
@@ -18,6 +19,7 @@ public class Conteudo {
     private String nome;
 
     @NotNull
+    @Lob
     private String descricao;
 
     @NotNull
@@ -70,4 +72,5 @@ public class Conteudo {
     public Long getAlunoId () {
         return this.aluno.getId();
     }
+
 }

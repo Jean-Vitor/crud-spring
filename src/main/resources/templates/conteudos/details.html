@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do conteúdo</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Página inicial</a></li>
+        <li><a th:href="@{/conteudo/list}">Conteúdos</a></li>
+        <li><a th:href="@{/aluno/list}">Alunos</a></li>
+    </ul>
+</nav>
+<div class="flex-container">
+        <div class="container">
+            <img th:src="@{/img/detalhes.webp}" alt="imagem de uma escola">
+            <h1 th:text="${conteudo.nome}"></h1>
+            <div class="div-data">
+                <label for="data"><i class="far fa-calendar"></i></label>
+                <span th:text="${conteudo.data}" id="data"></span>
+            </div>
+
+            <div class="div-autor">
+                <label for="nome"><i class="far fa-user"></i></label>
+                <span th:text="${conteudo.aluno.getNome()}" id="nome"></span>
+            </div>
+            <p th:text="${conteudo.descricao}" class="texto"></p>
+
+            <div class="comments-container">
+                <h3>Comentários</h3>
+                <div th:each="comentario : ${comentarios}">
+                    <label for="autor"><i class="far fa-user"></i></label>
+                    <span id="autor">Anônimo</span>
+                    <p th:text="${comentario.texto}" class="texto"></p>
+                </div>
+                <form th:action="@{'/comentario/salvar/' + ${conteudo.id}}" method="post">
+                    <textarea type="text" placeholder="Escreva um comentário" name="texto" id="texto" required></textarea>
+                    <button type="submit">Comentar</button>
+                </form>
+            </div>
+        </div>
+
+</div>
+
+</body>
+</html>

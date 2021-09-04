@@ -17,6 +17,7 @@
 
 <div class="flex-container">
     <div class="flex-align">
+
         <table class="styled-table">
             <thead>
             <tr>
@@ -56,6 +57,28 @@
             <span>Novo Conteúdo</span>
         </a>
     </div>
+    <script th:src="@{/sweet-alert/sweetalert2@11.js}"></script>
+    <script th:inline="javascript">
+        let errorMessage = [[${error}]];
+        if (errorMessage) {
+            var Toast =
+                Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: errorMessage
+                })
+        }
+    </script>
 </div>
 </body>
 </html>
